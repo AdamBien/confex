@@ -1,6 +1,6 @@
-# 🚀Quarkus with MicroProfile on BCE
+# confex - Minimalistic Conference Management System
 
-Quarkus MicroProfile template with BCE architecture pattern. Features boundary-control-entity separation, System Tests in a standalone module, REST endpoints with JAX-RS, CDI for dependency injection, and MicroProfile-only dependencies. A starting point for Quarkus projects with minimal dependencies.
+A minimalistic Conference Management System built with Quarkus and MicroProfile, demonstrating the BCE (Boundary-Control-Entity) design pattern and a "business first" approach. Features REST endpoints with JAX-RS, CDI for dependency injection, and MicroProfile-only dependencies.
 
 BCE-structured 👉 [bce.design](https://bce.design) | AI-assisted with 👉 [airails.dev](https://airails.dev)
 
