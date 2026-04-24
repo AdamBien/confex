@@ -20,11 +20,13 @@ class SpeakersResourceIT {
     @Test
     void createAndRetrieveSpeaker() {
         var speaker = Json.createObjectBuilder()
-                .add("firstName", "Duke")
-                .add("lastName", "Java")
-                .add("bio", "The iconic Java mascot since 1996")
-                .add("profilePicture", "https://duke.example.com/avatar.png")
-                .add("company", "Java Community")
+                .add("givenName", "Duke")
+                .add("familyName", "Java")
+                .add("description", "The iconic Java mascot since 1996")
+                .add("jobTitle", "Java Champion")
+                .add("affiliation", "Java Community")
+                .add("image", "https://duke.example.com/avatar.png")
+                .add("url", "https://duke.example.com")
                 .build();
 
         var response = this.client.create(speaker);
