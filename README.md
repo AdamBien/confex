@@ -2,7 +2,7 @@
 
 A minimalistic Conference Management System built with Quarkus and MicroProfile, demonstrating the BCE (Boundary-Control-Entity) design pattern and a "business first" approach. Features REST endpoints with JAX-RS, CDI for dependency injection, and MicroProfile-only dependencies.
 
-BCE-structured 👉 [bce.design](https://bce.design) | AI-assisted with 👉 [airails.dev](https://airails.dev)
+Based on 👉 [quarkus-microprofile](https://github.com/adambien/quarkus-microprofile) template | BCE-structured 👉 [bce.design](https://bce.design) | AI-assisted with 👉 [airails.dev](https://airails.dev)
 
 ## Getting Started
 
@@ -12,3 +12,5 @@ See [AGENTS.md](AGENTS.md#build--test) for build, dev mode, and system test inst
 
 - [service](service/README.md) - Quarkus application module with BCE structure
 - [service-st](service-st/README.md) - System tests for the service module
+
+Powered by [airhacks.live](https://airhacks.live)
