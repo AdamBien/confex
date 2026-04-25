@@ -8,6 +8,8 @@ import jakarta.json.JsonObject;
  * <a href="https://schema.org/Person">schema.org/Person</a> used as
  * <a href="https://schema.org/performer">schema.org/performer</a>.
  *
+ * @param identifier stable id, see <a href="https://schema.org/identifier">schema.org/identifier</a>;
+ *                   referenced by sessions to express many-to-many performer links
  * @param givenName first name
  * @param familyName last name
  * @param description biography or about text
@@ -16,11 +18,12 @@ import jakarta.json.JsonObject;
  * @param image profile picture URL
  * @param url speaker's website or public profile
  */
-public record Speaker(String givenName, String familyName, String description,
+public record Speaker(String identifier, String givenName, String familyName, String description,
                       String jobTitle, String affiliation, String image, String url) {
 
     public JsonObject toJSON() {
         return Json.createObjectBuilder()
+                .add("identifier", this.identifier)
                 .add("givenName", this.givenName)
                 .add("familyName", this.familyName)
                 .add("description", this.description)
@@ -33,6 +36,7 @@ public record Speaker(String givenName, String familyName, String description,
 
     public static Speaker fromJSON(JsonObject json) {
         return new Speaker(
+                json.getString("identifier"),
                 json.getString("givenName"),
                 json.getString("familyName"),
                 json.getString("description"),
