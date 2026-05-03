@@ -1,4 +1,4 @@
-package airhacks.qmp.health.boundary;
+package airhacks.confex.health.boundary;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,4 +1,4 @@
-package airhacks.qmp.speakers.boundary;
+package airhacks.confex.speakers.boundary;
 
 import jakarta.inject.Inject;
 import jakarta.json.Json;
@@ -7,7 +7,6 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.junit.jupiter.api.Test;
 
-import airhacks.confex.speakers.boundary.SpeakersResourceClient;
 import io.quarkus.test.junit.QuarkusTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,6 +20,7 @@ class SpeakersResourceIT {
     @Test
     void createAndRetrieveSpeaker() {
         var speaker = Json.createObjectBuilder()
+                .add("identifier", "duke-java")
                 .add("givenName", "Duke")
                 .add("familyName", "Java")
                 .add("description", "The iconic Java mascot since 1996")
@@ -35,5 +35,7 @@ class SpeakersResourceIT {
 
         var speakers = this.client.all();
         assertThat(speakers).isNotEmpty();
+        assertThat(speakers).anySatisfy(entry ->
+                assertThat(entry.asJsonObject().getString("identifier")).isEqualTo("duke-java"));
     }
 }
