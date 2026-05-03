@@ -1,6 +1,8 @@
 package airhacks.confex.sessions.boundary;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import airhacks.confex.sessions.control.Sessions;
+import airhacks.confex.sessions.entity.Session;
+import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -11,23 +13,19 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import airhacks.confex.sessions.entity.Session;
 
 @Path("sessions")
-@ApplicationScoped
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class SessionsResource {
 
-    List<Session> sessions = new CopyOnWriteArrayList<>();
+    @Inject
+    Sessions sessions;
 
     @GET
     public JsonArray all() {
         var builder = Json.createArrayBuilder();
-        this.sessions.stream()
+        this.sessions.all().stream()
                 .map(Session::toJSON)
                 .forEach(builder::add);
         return builder.build();
