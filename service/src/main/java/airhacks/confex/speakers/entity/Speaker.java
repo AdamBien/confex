@@ -54,14 +54,14 @@ public record Speaker(String identifier, String givenName, String familyName, St
 
     public static Speaker fromJSON(JsonObject json) {
         return new Speaker(
-                json.getString("identifier"),
-                json.getString("givenName"),
-                json.getString("familyName"),
-                json.getString("description"),
-                json.getString("jobTitle"),
-                json.getString("affiliation"),
-                json.getString("image"),
-                json.getString("url")
+                json.getString("identifier",null),
+                json.getString("givenName",null),
+                json.getString("familyName",null),
+                json.getString("description",null),
+                json.getString("jobTitle",null),
+                json.getString("affiliation",null),
+                json.getString("image",null),
+                json.getString("url",null)
         );
     }
 }

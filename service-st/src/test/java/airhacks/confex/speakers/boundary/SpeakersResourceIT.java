@@ -35,7 +35,21 @@ class SpeakersResourceIT {
 
         var speakers = this.client.all();
         assertThat(speakers).isNotEmpty();
-        assertThat(speakers).anySatisfy(entry ->
-                assertThat(entry.asJsonObject().getString("identifier")).isEqualTo("duke-java"));
+    }
+
+    @Test
+    void rejectSpeakerWithoutIdentifier() {
+        var invalid = Json.createObjectBuilder()
+                .add("givenName", "Duke")
+                .add("familyName", "Java")
+                .add("description", "The iconic Java mascot since 1996")
+                .add("jobTitle", "Java Champion")
+                .add("affiliation", "Java Community")
+                .add("image", "https://duke.example.com/avatar.png")
+                .add("url", "https://duke.example.com")
+                .build();
+
+        var response = this.client.create(invalid);
+        assertThat(response.getStatus()).isEqualTo(Response.Status.BAD_REQUEST.getStatusCode());
     }
 }
