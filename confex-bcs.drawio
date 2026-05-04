@@ -5,8 +5,15 @@
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
 
+        <mxCell id="health" value="health" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;fontSize=13;fontStyle=0;verticalAlign=top;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="200" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="health-boundary" value="boundary" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;fontSize=13;fontStyle=0;" vertex="1" parent="health">
+          <mxGeometry x="20" y="50" width="160" height="60" as="geometry"/>
+        </mxCell>
+
         <mxCell id="speakers" value="speakers" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;fontSize=13;fontStyle=0;verticalAlign=top;container=1;collapsible=0;" vertex="1" parent="1">
-          <mxGeometry x="80" y="80" width="200" height="320" as="geometry"/>
+          <mxGeometry x="80" y="280" width="200" height="320" as="geometry"/>
         </mxCell>
         <mxCell id="speakers-boundary" value="boundary" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;fontSize=13;fontStyle=0;" vertex="1" parent="speakers">
           <mxGeometry x="20" y="50" width="160" height="60" as="geometry"/>
@@ -19,7 +26,7 @@
         </mxCell>
 
         <mxCell id="sessions" value="sessions" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;fontSize=13;fontStyle=0;verticalAlign=top;container=1;collapsible=0;" vertex="1" parent="1">
-          <mxGeometry x="440" y="80" width="200" height="320" as="geometry"/>
+          <mxGeometry x="440" y="280" width="200" height="320" as="geometry"/>
         </mxCell>
         <mxCell id="sessions-boundary" value="boundary" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#d5e8d4;strokeColor=#82b366;fontColor=#000000;fontSize=13;fontStyle=0;" vertex="1" parent="sessions">
           <mxGeometry x="20" y="50" width="160" height="60" as="geometry"/>
@@ -31,10 +38,23 @@
           <mxGeometry x="20" y="210" width="160" height="60" as="geometry"/>
         </mxCell>
 
+        <mxCell id="validations" value="validations" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;fontColor=#000000;fontSize=13;fontStyle=0;verticalAlign=top;container=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="680" width="240" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="validations-control" value="control" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;arcSize=10;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#000000;fontSize=13;fontStyle=0;" vertex="1" parent="validations">
+          <mxGeometry x="20" y="50" width="200" height="60" as="geometry"/>
+        </mxCell>
+
         <mxCell id="control-link" value="findByIdentifier" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#000000;fontColor=#000000;fontSize=11;fontStyle=0;endArrow=block;endFill=1;shadow=0;" edge="1" source="sessions-control" target="speakers-control" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="entity-link" value="List&lt;Speaker&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#000000;fontColor=#000000;fontSize=11;fontStyle=0;endArrow=block;endFill=1;shadow=0;" edge="1" source="sessions-entity" target="speakers-entity" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="speakers-validations" value="requireNotBlank" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#000000;fontColor=#000000;fontSize=11;fontStyle=0;endArrow=block;endFill=1;shadow=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" source="speakers-entity" target="validations-control" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sessions-validations" value="requireNotBlank" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;strokeColor=#000000;fontColor=#000000;fontSize=11;fontStyle=0;endArrow=block;endFill=1;shadow=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" source="sessions-entity" target="validations-control" parent="1">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>
