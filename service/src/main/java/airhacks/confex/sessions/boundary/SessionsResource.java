@@ -1,11 +1,14 @@
 package airhacks.confex.sessions.boundary;
 
+import java.util.List;
+
 import airhacks.confex.sessions.control.Sessions;
 import airhacks.confex.sessions.entity.Session;
 import jakarta.inject.Inject;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonString;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -33,10 +36,29 @@ public class SessionsResource {
 
     @POST
     public Response create(JsonObject json) {
-        var session = Session.fromJSON(json);
-        this.sessions.add(session);
+        var session = this.sessions.create(
+                json.getString("identifier", null),
+                json.getString("name", null),
+                json.getString("description", null),
+                json.getString("about", null),
+                json.getString("startDate", null),
+                json.getString("endDate", null),
+                json.getString("location", null),
+                performerIds(json),
+                json.getString("url", null)
+        );
         return Response.status(Response.Status.CREATED)
                 .entity(session.toJSON())
                 .build();
+    }
+
+    static List<String> performerIds(JsonObject json) {
+        var ids = json.getJsonArray("performerIds");
+        if (ids == null) {
+            return List.of();
+        }
+        return ids.getValuesAs(JsonString.class).stream()
+                .map(JsonString::getString)
+                .toList();
     }
 }

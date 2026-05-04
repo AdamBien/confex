@@ -1,6 +1,7 @@
 package airhacks.confex.speakers.control;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import airhacks.confex.speakers.entity.Speaker;
@@ -15,6 +16,12 @@ public class Speakers {
 
     public List<Speaker> all() {
         return List.copyOf(this.speakers);
+    }
+
+    public Optional<Speaker> findByIdentifier(String identifier) {
+        return this.speakers.stream()
+                .filter(speaker -> identifier.equals(speaker.identifier()))
+                .findFirst();
     }
 
     public void add(Speaker speaker) {

@@ -2,9 +2,9 @@ package airhacks.confex.sessions.entity;
 
 import java.util.List;
 
+import airhacks.confex.speakers.entity.Speaker;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonString;
 import jakarta.ws.rs.BadRequestException;
 
 /**
@@ -20,12 +20,12 @@ import jakarta.ws.rs.BadRequestException;
  * @param startDate ISO-8601 start timestamp
  * @param endDate ISO-8601 end timestamp
  * @param location room, stage or venue
- * @param performerIds {@code Speaker.identifier} references; resolved by the speakers BC
+ * @param performers schema.org/performer association; resolved at the boundary, JPA-friendly for a future {@code @ManyToMany}
  * @param url session page or recording URL
  */
 public record Session(String identifier, String name, String description, String about,
                       String startDate, String endDate, String location,
-                      List<String> performerIds, String url) {
+                      List<Speaker> performers, String url) {
 
     public Session {
         requireNotBlank(identifier, "identifier");
@@ -44,8 +44,10 @@ public record Session(String identifier, String name, String description, String
     }
 
     public JsonObject toJSON() {
-        var performersArray = Json.createArrayBuilder();
-        this.performerIds.forEach(performersArray::add);
+        var performerArray = Json.createArrayBuilder();
+        this.performers.stream()
+                .map(Speaker::toJSON)
+                .forEach(performerArray::add);
         return Json.createObjectBuilder()
                 .add("identifier", this.identifier)
                 .add("name", this.name)
@@ -54,26 +56,8 @@ public record Session(String identifier, String name, String description, String
                 .add("startDate", this.startDate)
                 .add("endDate", this.endDate)
                 .add("location", this.location)
-                .add("performerIds", performersArray)
+                .add("performer", performerArray)
                 .add("url", this.url)
                 .build();
-    }
-
-    public static Session fromJSON(JsonObject json) {
-        var performerIds = json.getJsonArray("performerIds")
-                .getValuesAs(JsonString.class).stream()
-                .map(JsonString::getString)
-                .toList();
-        return new Session(
-                json.getString("identifier", null),
-                json.getString("name", null),
-                json.getString("description", null),
-                json.getString("about", null),
-                json.getString("startDate", null),
-                json.getString("endDate", null),
-                json.getString("location", null),
-                performerIds,
-                json.getString("url", null)
-        );
     }
 }
