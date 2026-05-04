@@ -1,6 +1,6 @@
-# confex - Minimalistic Conference Management System
+# confex - Conference Management
 
-A minimalistic Conference Management System built with Quarkus and MicroProfile, demonstrating the BCE (Boundary-Control-Entity) design pattern and a "business first" approach. Features REST endpoints with JAX-RS, CDI for dependency injection, and MicroProfile-only dependencies.
+Conference management built on Quarkus and MicroProfile. Domain (sessions, speakers) is modeled after [schema.org/Event](https://schema.org/Event) and [schema.org/Person](https://schema.org/Person). BCE-structured: JAX-RS resources at the boundary, JSON-P for serialization, CDI throughout, MicroProfile-only dependencies.
 
 Based on 👉 [quarkus-microprofile](https://github.com/adambien/quarkus-microprofile) template | BCE-structured 👉 [bce.design](https://bce.design) | AI-assisted with 👉 [airails.dev](https://airails.dev)
 
@@ -10,7 +10,7 @@ See [AGENTS.md](AGENTS.md#build--test) for build, dev mode, and system test inst
 
 ## Modules
 
-- [service](service/README.md) - Quarkus application module with BCE structure
+- [service](service/README.md) - Quarkus service module
 - [service-st](service-st/README.md) - System tests for the service module
 
 Powered by [airhacks.live](https://airhacks.live)
