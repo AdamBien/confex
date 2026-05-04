@@ -1,11 +1,12 @@
 package airhacks.confex.sessions.entity;
 
+import static airhacks.confex.validations.control.Validations.requireNotBlank;
+
 import java.util.List;
 
 import airhacks.confex.speakers.entity.Speaker;
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import jakarta.ws.rs.BadRequestException;
 
 /**
  * Conference session modeled after
@@ -30,17 +31,6 @@ public record Session(String identifier, String name, String description, String
     public Session {
         requireNotBlank(identifier, "identifier");
         requireNotBlank(name, "name");
-    }
-
-    /**
-     * Rejects null or blank input as
-     * <a href="https://www.rfc-editor.org/rfc/rfc9110.html#section-15.5.1">HTTP 400 Bad Request</a>,
-     * signaling a client-side error rather than a server fault.
-     */
-    static void requireNotBlank(String value, String name) {
-        if (value == null || value.isBlank()) {
-            throw new BadRequestException(name + " is required");
-        }
     }
 
     public JsonObject toJSON() {
